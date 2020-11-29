@@ -1,4 +1,4 @@
-package com.sda.model.mode;
+package com.sda.mode;
 
 import com.sda.model.characters.Enemy;
 import com.sda.model.characters.Hero;
