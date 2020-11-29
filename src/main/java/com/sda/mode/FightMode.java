@@ -1,5 +1,6 @@
 package com.sda.mode;
 
+import com.sda.exceptions.NoEmptySlotException;
 import com.sda.model.characters.*;
 import com.sda.model.other.Weapon;
 
@@ -14,7 +15,7 @@ public class FightMode {
         this.enemy = enemy;
     }
 
-    public void fight() {
+    public void fight() throws NoEmptySlotException {
         //hero damage
         int heroDamagePoints = Hero.DAMAGE;
         if (hero instanceof Warrior) {

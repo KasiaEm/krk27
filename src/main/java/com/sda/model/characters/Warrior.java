@@ -1,6 +1,7 @@
 package com.sda.model.characters;
 
 import com.sda.exceptions.InvalidTypeException;
+import com.sda.exceptions.NoEmptySlotException;
 import com.sda.model.enums.Race;
 import com.sda.model.other.Armor;
 import com.sda.model.other.ArmorPart;
@@ -22,7 +23,7 @@ public class Warrior extends Hero {
         return armor;
     }
 
-    public void assignWeapon(int slot) throws InvalidTypeException {
+    public void assignWeapon(int slot) throws InvalidTypeException, NoEmptySlotException {
         if (super.getInventory()[slot] instanceof Weapon) {
             Weapon toAssign = (Weapon) super.getInventory()[slot];
             super.getInventory()[slot] = null;
@@ -33,7 +34,7 @@ public class Warrior extends Hero {
         }
     }
 
-    public void assignArmorPart(int slot) throws InvalidTypeException {
+    public void assignArmorPart(int slot) throws InvalidTypeException, NoEmptySlotException {
         if (super.getInventory()[slot] instanceof ArmorPart) {
             ArmorPart toAssign = (ArmorPart) super.getInventory()[slot];
             super.getInventory()[slot] = null;

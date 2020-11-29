@@ -1,5 +1,7 @@
 package com.sda.model.characters;
 
+import com.sda.exceptions.GameOverException;
+import com.sda.exceptions.NoEmptySlotException;
 import com.sda.model.enums.Race;
 import com.sda.model.other.Food;
 import com.sda.model.other.InventoryObject;
@@ -44,7 +46,7 @@ public class Hero implements Vunerable {
         }
     }
 
-    public void addToInventory(InventoryObject toAdd) {
+    public void addToInventory(InventoryObject toAdd) throws NoEmptySlotException {
         boolean added = false;
         for (int i = 0; i < inventory.length; i++) {
             if (inventory[i] != null && inventory[i].equals(toAdd)) {
@@ -58,7 +60,7 @@ public class Hero implements Vunerable {
             }
         }
         if (!added) {
-            System.out.println("Couldn't add this item.");
+            throw new NoEmptySlotException();
         } else {
             updateOverloaded();
         }
@@ -75,10 +77,10 @@ public class Hero implements Vunerable {
     }
 
     @Override
-    public void receiveDamage(int points) {
+    public void receiveDamage(int points) throws GameOverException {
         this.currentHealth -= points;
         if (this.currentHealth <= 0) {
-            System.out.println("You're dead.");
+            throw new GameOverException();
         }
     }
 
