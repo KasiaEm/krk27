@@ -6,6 +6,7 @@ import com.sda.model.other.InventoryObject;
 public class Hero implements Vunerable {
     public static final double MAX_WEIGHT_LIMIT = 100;
     public static final int MAX_HEALTH = 100;
+    public static final int DAMAGE = 10;
     private String name;
     private String race;
     private int currentHealth;
