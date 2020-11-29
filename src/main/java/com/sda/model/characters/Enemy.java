@@ -1,6 +1,6 @@
 package com.sda.model.characters;
 
-public abstract class Enemy {
+public abstract class Enemy implements Vunerable{
     private String name;
     private int currentHealth;
     private int damage;
@@ -33,5 +33,13 @@ public abstract class Enemy {
 
     public int getDamage() {
         return damage;
+    }
+
+    @Override
+    public void receiveDamage(int points) {
+        this.currentHealth -= points;
+        if (this.currentHealth <= 0) {
+            System.out.println("Enemy's dead.");
+        }
     }
 }
