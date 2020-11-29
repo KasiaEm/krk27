@@ -1,7 +1,5 @@
 package com.sda.model.other;
 
-import com.sda.model.enums.BodyPart;
-
 public class Armor {
     private ArmorPart head;
     private ArmorPart torso;
@@ -52,5 +50,15 @@ public class Armor {
                 //....
         }
         return toReturn;
+    }
+
+    public int countSummaryDamageResistance(){
+        return head.getDamageResistance()
+                + torso.getDamageResistance()
+                + leftArm.getDamageResistance()
+                + rightArm.getDamageResistance()
+                + leftLeg.getDamageResistance()
+                + rigthLeg.getDamageResistance();
+
     }
 }

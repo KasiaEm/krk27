@@ -1,5 +1,6 @@
 package com.sda.model.characters;
 
+import com.sda.exceptions.GameOverException;
 import com.sda.exceptions.InvalidTypeException;
 import com.sda.exceptions.NoEmptySlotException;
 import com.sda.model.enums.Race;
@@ -41,6 +42,14 @@ public class Warrior extends Hero {
             super.addToInventory(this.armor.assignPart(toAssign));
         } else {
             throw new InvalidTypeException("It's not armor part.");
+        }
+    }
+
+    @Override
+    public void receiveDamage(int points) throws GameOverException {
+        int damageResistance = this.armor.countSummaryDamageResistance();
+        if (damageResistance < points) {
+            super.receiveDamage(points - damageResistance);
         }
     }
 }
