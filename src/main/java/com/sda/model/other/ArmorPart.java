@@ -1,10 +1,12 @@
 package com.sda.model.other;
 
+import com.sda.model.enums.BodyPart;
+
 public class ArmorPart extends InventoryObject{
     private int damageResistance;
-    private String bodyPart;
+    private BodyPart bodyPart;
 
-    public ArmorPart(String name, double weight, int count, int damageResistance, String bodyPart) {
+    public ArmorPart(String name, double weight, int count, int damageResistance, BodyPart bodyPart) {
         super(name, weight, count);
         this.damageResistance = damageResistance;
         this.bodyPart = bodyPart;
@@ -14,7 +16,7 @@ public class ArmorPart extends InventoryObject{
         return damageResistance;
     }
 
-    public String getBodyPart() {
+    public BodyPart getBodyPart() {
         return bodyPart;
     }
 }

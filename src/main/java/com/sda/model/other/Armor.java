@@ -1,5 +1,7 @@
 package com.sda.model.other;
 
+import com.sda.model.enums.BodyPart;
+
 public class Armor {
     private ArmorPart head;
     private ArmorPart torso;
@@ -35,13 +37,17 @@ public class Armor {
     public ArmorPart assignPart(ArmorPart toAssign){
         ArmorPart toReturn = null;
         switch(toAssign.getBodyPart()){
-            case "head":
+            case HEAD:
                 toReturn = this.head;
                 this.head = toAssign;
                 break;
-            case "torso":
+            case TORSO:
                 toReturn = this.torso;
                 this.torso = toAssign;
+                break;
+            case LEFT_ARM:
+                toReturn = this.leftArm;
+                this.leftArm = toAssign;
                 break;
                 //....
         }
