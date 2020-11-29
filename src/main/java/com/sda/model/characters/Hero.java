@@ -3,7 +3,7 @@ package com.sda.model.characters;
 import com.sda.model.other.Food;
 import com.sda.model.other.InventoryObject;
 
-public class Hero {
+public class Hero implements Vunerable {
     public static final double MAX_WEIGHT_LIMIT = 100;
     public static final int MAX_HEALTH = 100;
     private String name;
@@ -72,6 +72,7 @@ public class Hero {
         this.overloaded = sum > MAX_WEIGHT_LIMIT;
     }
 
+    @Override
     public void receiveDamage(int points) {
         this.currentHealth -= points;
         if (this.currentHealth <= 0) {
@@ -82,10 +83,10 @@ public class Hero {
     public void eat(int slot) {
         if (inventory[slot] instanceof Food) {
             Food toEat = (Food) inventory[slot];
-            int sum = this.currentHealth+toEat.getHealthPointsRegeneration();
+            int sum = this.currentHealth + toEat.getHealthPointsRegeneration();
             this.currentHealth += Math.min(sum, MAX_HEALTH);
             if (toEat.getCount() > 1) {
-                toEat.setCount(toEat.getCount()-1);
+                toEat.setCount(toEat.getCount() - 1);
             } else {
                 inventory[slot] = null;
             }
