@@ -50,4 +50,14 @@ public class Spell implements Comparable{
         Spell spell = (Spell) o;
         return this.name.compareTo(spell.name);
     }
+
+    @Override
+    public String toString() {
+        return "Spell{" +
+                "name='" + name + '\'' +
+                ", damageImpact=" + damageImpact +
+                ", healthImpact=" + healthImpact +
+                ", immunityImpact=" + immunityImpact +
+                '}';
+    }
 }

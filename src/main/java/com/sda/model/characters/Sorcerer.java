@@ -32,4 +32,10 @@ public class Sorcerer extends Hero {
             System.out.println("Spell already exists!");
         }
     }
+
+    public void showSpells() {
+        for (Spell s : spells) {
+            System.out.println(s);
+        }
+    }
 }
