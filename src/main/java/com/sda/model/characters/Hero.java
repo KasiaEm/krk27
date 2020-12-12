@@ -15,6 +15,7 @@ public class Hero implements Vunerable {
     private int currentHealth;
     private InventoryObject inventory[] = new InventoryObject[10];
     private boolean overloaded;
+    private int money = 200;
 
     public Hero(String name, Race race) {
         this.name = name;
@@ -113,5 +114,13 @@ public class Hero implements Vunerable {
 
     public InventoryObject[] getInventory() {
         return inventory;
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
     }
 }

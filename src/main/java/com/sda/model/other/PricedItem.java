@@ -16,4 +16,12 @@ public class PricedItem {
     public InventoryObject getItem() {
         return item;
     }
+
+    @Override
+    public String toString() {
+        return "PricedItem{" +
+                "price=" + price +
+                ", item=" + item +
+                '}';
+    }
 }

@@ -9,5 +9,7 @@ public class Trader {
     private String name;
     private Map<String, PricedItem> stock = new HashMap<>();
 
-    
+    public Map<String, PricedItem> getStock() {
+        return stock;
+    }
 }
