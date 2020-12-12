@@ -1,64 +1,36 @@
 package com.sda.model.other;
 
+import com.sda.model.enums.BodyPart;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class Armor {
-    private ArmorPart head;
-    private ArmorPart torso;
-    private ArmorPart leftArm;
-    private ArmorPart rightArm;
-    private ArmorPart leftLeg;
-    private ArmorPart rigthLeg;
+    private Map<BodyPart, ArmorPart> parts = new HashMap<>();
 
-    public ArmorPart getHead() {
-        return head;
+    public Map<BodyPart, ArmorPart> getParts() {
+        return parts;
     }
 
-    public ArmorPart getTorso() {
-        return torso;
-    }
-
-    public ArmorPart getLeftArm() {
-        return leftArm;
-    }
-
-    public ArmorPart getRightArm() {
-        return rightArm;
-    }
-
-    public ArmorPart getLeftLeg() {
-        return leftLeg;
-    }
-
-    public ArmorPart getRigthLeg() {
-        return rigthLeg;
-    }
-
-    public ArmorPart assignPart(ArmorPart toAssign){
-        ArmorPart toReturn = null;
-        switch(toAssign.getBodyPart()){
-            case HEAD:
-                toReturn = this.head;
-                this.head = toAssign;
-                break;
-            case TORSO:
-                toReturn = this.torso;
-                this.torso = toAssign;
-                break;
-            case LEFT_ARM:
-                toReturn = this.leftArm;
-                this.leftArm = toAssign;
-                break;
-                //....
+    public ArmorPart assignPart(ArmorPart toAssign) {
+        if (toAssign != null) {
+            ArmorPart toReturn = parts.get(toAssign.getBodyPart());
+            parts.put(toAssign.getBodyPart(), toAssign);
+            return toReturn;
+            //
+            //return parts.replace(toAssign.getBodyPart(), toAssign);
         }
-        return toReturn;
+        return null;
     }
 
-    public int countSummaryDamageResistance(){
-        return head.getDamageResistance()
-                + torso.getDamageResistance()
-                + leftArm.getDamageResistance()
-                + rightArm.getDamageResistance()
-                + leftLeg.getDamageResistance()
-                + rigthLeg.getDamageResistance();
-
+    public int countSummaryDamageResistance() {
+        int sum = 0;
+        /*for( BodyPart p: parts.keySet()){
+            sum+= parts.get(p).getDamageResistance();
+        }*/
+        for(ArmorPart p : parts.values()){
+            sum+= p.getDamageResistance();
+        }
+        return sum;
     }
 }
