@@ -6,6 +6,11 @@ import com.sda.model.enums.Race;
 import com.sda.model.other.Food;
 import com.sda.model.other.InventoryObject;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.stream.Stream;
+
 public class Hero implements Vunerable {
     public static final double MAX_WEIGHT_LIMIT = 100;
     public final int maxHealth;
@@ -52,11 +57,14 @@ public class Hero implements Vunerable {
     }
 
     public void showInventory() {
-        for (InventoryObject i : inventory) {
-            if (i != null) {
-                System.out.println(i);
-            }
-        }
+//        for (InventoryObject i : inventory) {
+//            if (i != null) {
+//                System.out.println(i);
+//            }
+//        }
+        Arrays.stream(inventory)
+                .filter(Objects::nonNull)
+                .forEach(System.out::println);
     }
 
     public void addToInventory(InventoryObject toAdd) throws NoEmptySlotException {
@@ -80,12 +88,16 @@ public class Hero implements Vunerable {
     }
 
     private void updateOverloaded() {
-        double sum = 0;
+        /*double sum = 0;
         for (InventoryObject i : inventory) {
             if (i != null) {
                 sum += i.getWeight() * i.getCount();
             }
-        }
+        }*/
+        double sum = Arrays.stream(inventory)
+                .filter(Objects::nonNull)
+                .map(i -> i.getCount()*i.getWeight())
+                .reduce(0d, (a, b) -> a+b);
         this.overloaded = sum > MAX_WEIGHT_LIMIT;
     }
 

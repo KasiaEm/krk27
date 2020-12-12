@@ -14,9 +14,10 @@ public class TradeMode {
     }
 
     public void showStock() {
-        for (PricedItem item : trader.getStock().values()) {
+        /*for (PricedItem item : trader.getStock().values()) {
             System.out.println(item);
-        }
+        }*/
+        trader.getStock().values().forEach(System.out::println);
     }
 
     public void buy(String name) throws NoEmptySlotException {
