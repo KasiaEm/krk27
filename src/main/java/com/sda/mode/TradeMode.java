@@ -25,6 +25,7 @@ public class TradeMode {
             if (hero.getMoney() >= toBuy.getPrice()) {
                 hero.addToInventory(toBuy.getItem());
                 hero.setMoney(hero.getMoney() - toBuy.getPrice());
+                trader.getStock().remove(name);
             } else {
                 System.out.println("Not enough money!");
             }
