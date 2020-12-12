@@ -9,7 +9,7 @@ import com.sda.model.other.InventoryObject;
 public class Hero implements Vunerable {
     public static final double MAX_WEIGHT_LIMIT = 100;
     public final int maxHealth;
-    public int damage = 10;
+    private int damage = 10;
     private String name;
     private Race race;
     private int currentHealth;
@@ -40,6 +40,10 @@ public class Hero implements Vunerable {
 
     public int getCurrentHealth() {
         return currentHealth;
+    }
+
+    public void setCurrentHealth(int currentHealth) {
+        this.currentHealth = currentHealth;
     }
 
     public boolean isOverloaded() {

@@ -13,13 +13,23 @@ public class Sorcerer extends Hero {
 
     public Sorcerer(String name, Race race) {
         super(name, race);
-        super.damage *= 2;
+        setDamage(getDamage() * 2);
     }
 
     @Override
     public void receiveDamage(int points) throws GameOverException {
         if (points > this.immunityPoints) {
             super.receiveDamage(points - this.immunityPoints);
+        }
+    }
+
+    public void addSpell(Spell spell) {
+        if (spells.add(spell)) {
+            this.immunityPoints += spell.getImmunityImpact();
+            setDamage(getDamage() + spell.getDamageImpact());
+            setCurrentHealth(getCurrentHealth() + spell.getHealthImpact());
+        } else {
+            System.out.println("Spell already exists!");
         }
     }
 }
