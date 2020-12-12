@@ -18,7 +18,7 @@ public class FightMode {
 
     public void fight() throws NoEmptySlotException, GameOverException {
         //hero damage
-        int heroDamagePoints = this.hero.getDamage();
+        int heroDamagePoints = hero.getDamage();
         if (hero instanceof Warrior) {
             heroDamagePoints = ((Warrior) hero).getWeapon().getDamagePoints();
         }
