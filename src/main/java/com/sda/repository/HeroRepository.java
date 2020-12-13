@@ -28,6 +28,10 @@ public class HeroRepository {
         }
     }
 
+    public Map<String, Hero> getHeroes() {
+        return heroes;
+    }
+
     private void prepareData() throws NoEmptySlotException, InvalidTypeException {
         Hero countryMan = new Hero("Andrzej", Race.HUMAN);
         countryMan.setDamage(11);
