@@ -3,6 +3,10 @@ package com.sda.mode;
 import com.sda.exceptions.NoEmptySlotException;
 import com.sda.model.characters.Hero;
 import com.sda.model.other.PricedItem;
+import com.sda.model.other.Weapon;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class TradeMode {
     private Trader trader;
@@ -33,5 +37,28 @@ public class TradeMode {
         } else {
             System.out.println("Item not found!");
         }
+    }
+
+    public List<PricedItem> itemByPrice(int min, int max) {
+        return trader.getStock().values().stream()
+                .filter(i -> i.getPrice() <= max && i.getPrice() >= min)
+                .collect(Collectors.toList());
+    }
+
+    public int sumPrices() {
+        return trader.getStock().values().stream()
+                .map(PricedItem::getPrice)
+                .reduce(0, (a, b) -> a + b);
+    }
+
+    public List<PricedItem> weaponByDamage(int min, int max) {
+        return trader.getStock().values().stream()
+                .filter(i -> i.getItem() instanceof Weapon)
+                //.filter(i -> ((Weapon) i.getItem()).getDamagePoints() >=min && ((Weapon) i.getItem()).getDamagePoints() <=max)
+                .filter(i -> {
+                    int damagePoints = ((Weapon) i.getItem()).getDamagePoints();
+                    return damagePoints >= min && damagePoints <= max;
+                })
+                .collect(Collectors.toList());
     }
 }
