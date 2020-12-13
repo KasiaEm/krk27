@@ -87,7 +87,7 @@ public class Hero implements Vunerable {
         }
     }
 
-    private void updateOverloaded() {
+    public double updateOverloaded() {
         /*double sum = 0;
         for (InventoryObject i : inventory) {
             if (i != null) {
@@ -99,6 +99,7 @@ public class Hero implements Vunerable {
                 .map(i -> i.getCount()*i.getWeight())
                 .reduce(0d, (a, b) -> a+b);
         this.overloaded = sum > MAX_WEIGHT_LIMIT;
+        return sum;
     }
 
     @Override

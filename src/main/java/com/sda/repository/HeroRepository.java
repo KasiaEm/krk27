@@ -13,12 +13,14 @@ import com.sda.model.other.Spell;
 import com.sda.model.other.Weapon;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class HeroRepository {
     private Map<String, Hero> heroes = new HashMap<>();
 
-    public HeroRepository(){
+    public HeroRepository() {
         try {
             prepareData();
         } catch (NoEmptySlotException | InvalidTypeException e) {
@@ -56,4 +58,41 @@ public class HeroRepository {
         sorcerer.addSpell(new Spell("Blabla", 10, 10, 10));
         heroes.put("Gandalf", sorcerer);
     }
+
+    public List<Hero> heroByName(String name) {
+        return heroes.values().stream()
+                .filter(h -> h.getName().contains(name))
+                .collect(Collectors.toList());
+    }
+
+    public List<Hero> heroByRace(Race race) {
+        return heroes.values().stream()
+                .filter(h -> h.getRace().equals(race))
+                .collect(Collectors.toList());
+    }
+
+    public List<Hero> heroByHealth(int minHealth) {
+        return heroes.values().stream()
+                .filter(h -> h.getCurrentHealth() >= minHealth)
+                .collect(Collectors.toList());
+    }
+
+    public List<Hero> heroByWeapon(String weaponName) {
+        return heroes.values().stream()
+                .filter(h -> h instanceof Warrior)
+                .map(h -> (Warrior) h)
+                .filter(w -> w.getWeapon().getName().equals(weaponName))
+                .collect(Collectors.toList());
+    }
+
+    public List<Hero> heroByLoad(int min, int max) {
+        return heroes.values().stream()
+                //.filter(h -> h.updateOverloaded() >= min && h.updateOverloaded() <= max)
+                .filter(h -> {
+                    double sum = h.updateOverloaded();
+                    return sum <= max && sum >= min;
+                })
+                .collect(Collectors.toList());
+    }
+
 }
