@@ -1,5 +1,6 @@
 package com.sda;
 
+import com.sda.exceptions.GameOverException;
 import com.sda.model.characters.Enemy;
 import com.sda.model.characters.Hero;
 import com.sda.model.characters.Raider;
@@ -36,6 +37,18 @@ public class Game {
                 default:
                     System.out.println("Unknown command.");
             }
+            try {
+                if (under == '~') {
+                    hero.receiveDamage(1);
+                    System.out.println("health -1");
+                } else if(under == '.'){
+                    hero.receiveDamage(5);
+                    System.out.println("health -5");
+                }
+            } catch (GameOverException e) {
+                System.out.println("Game over.");
+                break;
+            }
         }
     }
 
@@ -45,11 +58,11 @@ public class Game {
 
         if (input.equals("W") && heroPos.getY() - 1 >= 0) {
             heroPos.changeY(-1);
-        } else if (input.equals("A") && heroPos.getX()-1 >=0) {
+        } else if (input.equals("A") && heroPos.getX() - 1 >= 0) {
             heroPos.changeX(-1);
-        } else if(input.equals("D") && heroPos.getX()+1 < map[0].length){
+        } else if (input.equals("D") && heroPos.getX() + 1 < map[0].length) {
             heroPos.changeX(1);
-        } else if(input.equals("S") && heroPos.getY()+1 < map.length){
+        } else if (input.equals("S") && heroPos.getY() + 1 < map.length) {
             heroPos.changeY(1);
         }
 
