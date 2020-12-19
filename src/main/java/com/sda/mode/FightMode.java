@@ -33,6 +33,7 @@ public class FightMode {
         while (hero.getCurrentHealth() > 0) {
             //hero attacks
             enemy.receiveDamage(heroDamagePoints);
+            System.out.println("Enemy damaged by " + heroDamagePoints + " points.");
             if (enemy.getCurrentHealth() <= 0) {
                 if (price != null) {
                     hero.addToInventory(price);
@@ -47,6 +48,7 @@ public class FightMode {
             } else {
                 hero.receiveDamage(enemyDamagePoints);
             }
+            System.out.println("Hero damaged by " + enemyDamagePoints + " points.");
         }
     }
 }

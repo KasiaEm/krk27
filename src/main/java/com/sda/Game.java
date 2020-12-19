@@ -1,9 +1,15 @@
 package com.sda;
 
 import com.sda.exceptions.GameOverException;
+import com.sda.exceptions.InvalidTypeException;
+import com.sda.exceptions.NoEmptySlotException;
+import com.sda.mode.FightMode;
 import com.sda.model.characters.Enemy;
 import com.sda.model.characters.Hero;
 import com.sda.model.characters.Raider;
+import com.sda.model.characters.Warrior;
+import com.sda.model.other.Food;
+import com.sda.model.other.InventoryObject;
 import com.sda.model.other.Weapon;
 import com.sda.repository.HeroRepository;
 
@@ -34,6 +40,15 @@ public class Game {
                 case "D":
                     move(input);
                     break;
+                case "INVENTORY":
+                    hero.showInventory();
+                    break;
+                case "EAT":
+                    eat();
+                    break;
+                case "WEAPON":
+                    weapon();
+                    break;
                 default:
                     System.out.println("Unknown command.");
             }
@@ -44,12 +59,40 @@ public class Game {
                 } else if(under == '.'){
                     hero.receiveDamage(5);
                     System.out.println("health -5");
+                } else if(under == '?'){
+                    InventoryObject surprise = new Food("Apple", 0.1, 2, 20);
+                    hero.addToInventory(surprise);
+                    under = '_';
+                } else if(under == 'E'){
+                    Raider enemy = new Raider("Zly Grzegorz", 100, 10);
+                    enemy.setWeapon(new Weapon("Axe", 5, 1, 30));
+                    FightMode fightMode = new FightMode(hero, enemy);
+                    fightMode.fight();
+                    enemiesKilled++;
                 }
             } catch (GameOverException e) {
                 System.out.println("Game over.");
                 break;
+            } catch (NoEmptySlotException e) {
+                System.out.println("Couldn't add to inventory.");
             }
         }
+    }
+
+    private static void weapon() {
+        int slotNr = s.nextInt();
+        if(hero instanceof Warrior){
+            try {
+                ((Warrior) hero).assignWeapon(slotNr);
+            } catch (InvalidTypeException | NoEmptySlotException e) {
+                System.out.println("Couldn't assign weapon.");
+            }
+        }
+    }
+
+    private static void eat() {
+        int slotNr = s.nextInt();
+        hero.eat(slotNr);
     }
 
     private static void move(String input) {

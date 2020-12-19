@@ -63,7 +63,6 @@ public class Hero implements Vunerable {
 //            }
 //        }
         Arrays.stream(inventory)
-                .filter(Objects::nonNull)
                 .forEach(System.out::println);
     }
 
