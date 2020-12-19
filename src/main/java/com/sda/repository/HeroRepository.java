@@ -48,6 +48,7 @@ public class HeroRepository {
         warrior.assignWeapon(0);
         warrior.addToInventory(new ArmorPart("Torso Armor", 1, 1, 50, BodyPart.TORSO));
         warrior.assignArmorPart(0);
+        warrior.addToInventory(new Weapon("HAMMER", 3, 1, 100));
         heroes.put("Geralt", warrior);
 
         Warrior warrior2 = new Warrior("Ksiaze Mroku", Race.GHOUL);

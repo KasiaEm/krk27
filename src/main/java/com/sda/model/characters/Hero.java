@@ -57,10 +57,8 @@ public class Hero implements Vunerable {
     }
 
     public void showInventory() {
-//        for (InventoryObject i : inventory) {
-//            if (i != null) {
+//        for (InventoryObject i : inventory) {]
 //                System.out.println(i);
-//            }
 //        }
         Arrays.stream(inventory)
                 .forEach(System.out::println);

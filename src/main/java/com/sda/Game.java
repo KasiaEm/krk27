@@ -56,32 +56,38 @@ public class Game {
                 if (under == '~') {
                     hero.receiveDamage(1);
                     System.out.println("health -1");
-                } else if(under == '.'){
+                } else if (under == '.') {
                     hero.receiveDamage(5);
                     System.out.println("health -5");
-                } else if(under == '?'){
+                } else if (under == '?') {
                     InventoryObject surprise = new Food("Apple", 0.1, 2, 20);
                     hero.addToInventory(surprise);
                     under = '_';
-                } else if(under == 'E'){
+                } else if (under == 'E') {
                     Raider enemy = new Raider("Zly Grzegorz", 100, 10);
                     enemy.setWeapon(new Weapon("Axe", 5, 1, 30));
                     FightMode fightMode = new FightMode(hero, enemy);
                     fightMode.fight();
                     enemiesKilled++;
+                    under = 'X';
                 }
             } catch (GameOverException e) {
-                System.out.println("Game over.");
+                System.out.println("Game over. You're dead.");
                 break;
             } catch (NoEmptySlotException e) {
                 System.out.println("Couldn't add to inventory.");
             }
         }
+        if (hero.getCurrentHealth() > 0) {
+            System.out.println("You win!");
+            System.out.println("Enemies killed: " + enemiesKilled);
+            System.out.println("Your health: " + hero.getCurrentHealth());
+        }
     }
 
     private static void weapon() {
         int slotNr = s.nextInt();
-        if(hero instanceof Warrior){
+        if (hero instanceof Warrior) {
             try {
                 ((Warrior) hero).assignWeapon(slotNr);
             } catch (InvalidTypeException | NoEmptySlotException e) {
